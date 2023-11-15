@@ -81,6 +81,10 @@ export let StyledInputMask = styled(InputMask)`
   line-height: 1.14;
   border: none;
   outline: none;
+
+  ::placeholder {
+    color: #c0bcdf;
+  }
 `;
 
 export let StyledPasswordInput = styled(StyledInput)`
@@ -96,6 +100,11 @@ export let StyledSelectInput = styled(Select)`
     padding: 12px 10px 12px 16px;
     border: none !important;
     border-radius: 0;
+  }
+
+  .ant-select-selection-placeholder {
+    color: #c0bcdf;
+    font-weight: 400;
   }
 
   width: 100%;

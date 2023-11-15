@@ -19,14 +19,8 @@ interface IEnterClientDetails {
 }
 
 export function EnterClientDetails({ step, dataUser }: IEnterClientDetails) {
-  let {
-    form,
-    touchedErrors,
-    isValid,
-    getPhoneMask,
-    handleCountryChange,
-    renderedSelectCountry,
-  } = useEnterClientDetails({ dataUser });
+  let { form, touchedErrors, isValid, renderedSelectCountry } =
+    useEnterClientDetails({ dataUser });
 
   return (
     <Modal>
@@ -58,27 +52,21 @@ export function EnterClientDetails({ step, dataUser }: IEnterClientDetails) {
         <ContainerInput>
           <Title>Country</Title>
           <StyledSelectInput
-            placeholder="Your country"
-            value={form.values.country}
+            placeholder="Select a country"
             onBlur={form.handleBlur}
             style={{ width: '100%', height: '40px' }}
-            onChange={(value) => {
-              let event = {
-                target: { value, name: 'country' } as unknown as EventTarget &
-                  HTMLInputElement,
-              };
-              //@ts-ignore
-              handleCountryChange(event);
-            }}
             options={renderedSelectCountry}
+            onChange={(value) => form.setFieldValue('country', value)}
           />
           <Error>{touchedErrors.country}</Error>
         </ContainerInput>
         <ContainerInput>
           <Title>Phone Number</Title>
           <StyledInputMask
-            mask={getPhoneMask()}
-            type="text"
+            mask="+7 (999) 999-99-99"
+            maskChar=""
+            type="tel"
+            placeholder="Input phone number"
             name="phoneNumber"
             value={form.values.phoneNumber}
             onBlur={form.handleBlur}
