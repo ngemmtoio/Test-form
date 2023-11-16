@@ -10,13 +10,13 @@ export let MainWrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: baseline;
 `;
 
 export let StepperContainer = styled.div`
   position: absolute;
-  top: 180px;
-  left: 70px;
+  top: 0;
+  left: 0;
+  transform: translate(70px, 180px);
 `;
 
 export let TitleContainer = styled.div`
@@ -24,7 +24,7 @@ export let TitleContainer = styled.div`
   align-items: center;
   justify-items: center;
   grid-row-gap: 17px;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 export let ContentContainer = styled.div`
@@ -49,6 +49,10 @@ export let Wrapper = styled.div`
   grid-row-gap: 40px;
 `;
 
+export let ClientDetailsWrapper = styled(Wrapper)`
+  grid-row-gap: 20px;
+`;
+
 export let ContainerInput = styled.div`
   display: grid;
   grid-row-gap: 8px;
@@ -59,6 +63,10 @@ export let Title = styled.div`
   font-weight: 100;
   line-height: 1.14;
   color: #ffffff;
+`;
+
+export let ReviewTitle = styled(Title)`
+  color: #cecaeb;
 `;
 
 export let StyledInput = styled.input`
@@ -96,10 +104,13 @@ export let StyledPasswordInput = styled(StyledInput)`
 `;
 
 export let StyledSelectInput = styled(Select)`
-  .ant-select-selector {
-    padding: 12px 10px 12px 16px;
-    border: none !important;
-    border-radius: 0;
+  &&& {
+    .ant-select-selector {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 0;
+    }
   }
 
   .ant-select-selection-placeholder {
@@ -107,13 +118,17 @@ export let StyledSelectInput = styled(Select)`
     font-weight: 400;
   }
 
-  width: 100%;
+  .ant-select-arrow {
+    top: 65%;
+  }
+
+  .ant-select-clear {
+    top: 65%;
+  }
+
   font-size: 14px;
   font-weight: 100;
   line-height: 1.14;
-  border: none;
-  outline: none;
-  position: relative;
 `;
 
 export let StyledButton = styled.button<IButtonProps>`
@@ -123,6 +138,7 @@ export let StyledButton = styled.button<IButtonProps>`
   font-size: 24px;
   font-weight: 500;
   background-color: ${({ disabled }) => (disabled ? '#A39FC1' : '#ffffff')};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 
 export let Error = styled.div`

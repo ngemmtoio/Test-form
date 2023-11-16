@@ -7,11 +7,13 @@ let validationSchema = yup.object().shape({
   password: yup
     .string()
     .required('This is a required field')
-    .min(5, 'Password must be at least 5 characters'),
+    .min(8, 'Minimum length - 8 characters')
+    .max(16, 'Maximum length - 16 characters'),
   repeatPassword: yup
     .string()
     .required('This is a required field')
-    .min(5, 'Password must be at least 5 characters')
+    .min(8, 'Minimum length - 8 characters')
+    .max(16, 'Maximum length - 16 characters')
     .when('password', {
       is: (password: any) => password && password.length > 0,
       then: yup.string().oneOf([yup.ref('password')], 'Passwords do not match'),

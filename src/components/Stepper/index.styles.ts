@@ -19,6 +19,7 @@ export let ContainerContent = styled.div`
 export let Cube = styled.div<ICubeProps>`
   width: 16px;
   height: 16px;
+  border-radius: 2px;
   background-color: ${({ isStep }) => (isStep ? '#5845dd' : '#C9C5E8')};
 `;
 

@@ -4,27 +4,29 @@ import {
   StyledButton,
   StyledInput,
   Title,
-  Wrapper,
   Error,
   StyledInputMask,
   StyledSelectInput,
+  ClientDetailsWrapper,
 } from '../../index.styles';
-import { stepsForm } from '../helpers';
 import { IDataUser } from '../../../../entities';
 import { useEnterClientDetails } from './useEnterClientDetails';
 
 interface IEnterClientDetails {
-  step: (i: stepsForm) => void;
-  dataUser: (v: IDataUser) => void;
+  onContinue: () => void;
+  setDataUser: (v: IDataUser) => void;
 }
 
-export function EnterClientDetails({ step, dataUser }: IEnterClientDetails) {
+export function EnterClientDetails({
+  onContinue,
+  setDataUser,
+}: IEnterClientDetails) {
   let { form, touchedErrors, isValid, renderedSelectCountry } =
-    useEnterClientDetails({ dataUser });
+    useEnterClientDetails({ setDataUser });
 
   return (
     <Modal>
-      <Wrapper>
+      <ClientDetailsWrapper>
         <ContainerInput>
           <Title>Username</Title>
           <StyledInput
@@ -54,9 +56,10 @@ export function EnterClientDetails({ step, dataUser }: IEnterClientDetails) {
           <StyledSelectInput
             placeholder="Select a country"
             onBlur={form.handleBlur}
-            style={{ width: '100%', height: '40px' }}
             options={renderedSelectCountry}
             onChange={(value) => form.setFieldValue('country', value)}
+            showSearch
+            allowClear
           />
           <Error>{touchedErrors.country}</Error>
         </ContainerInput>
@@ -76,14 +79,14 @@ export function EnterClientDetails({ step, dataUser }: IEnterClientDetails) {
         </ContainerInput>
         <StyledButton
           disabled={!isValid}
-          onClick={async () => {
-            await form.handleSubmit();
-            step(stepsForm.ENTER_PASSWORD);
+          onClick={() => {
+            form.handleSubmit();
+            onContinue();
           }}
         >
           Continue
         </StyledButton>
-      </Wrapper>
+      </ClientDetailsWrapper>
     </Modal>
   );
 }

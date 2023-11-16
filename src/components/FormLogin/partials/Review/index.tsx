@@ -1,6 +1,7 @@
 import { Modal } from '../../../Modal';
 import {
   DataContainer,
+  ReviewTitle,
   StyledButton,
   Title,
   WrapperReview,
@@ -9,29 +10,32 @@ import { IDataUser } from '../../../../entities';
 
 interface IReview {
   dataUser: IDataUser;
+  onContinue: () => void;
 }
 
-export function Review({ dataUser }: IReview) {
+export function Review({ dataUser, onContinue }: IReview) {
   return (
     <Modal>
       <WrapperReview>
         <DataContainer>
-          <Title style={{ color: '#CECAEB' }}>Username</Title>
+          <ReviewTitle>Username</ReviewTitle>
           <Title>{dataUser.name}</Title>
         </DataContainer>
         <DataContainer>
-          <Title style={{ color: '#CECAEB' }}>Email</Title>
+          <ReviewTitle>Email</ReviewTitle>
           <Title>{dataUser.email}</Title>
         </DataContainer>
         <DataContainer>
-          <Title style={{ color: '#CECAEB' }}>Country</Title>
+          <ReviewTitle>Country</ReviewTitle>
           <Title>{dataUser.country}</Title>
         </DataContainer>
         <DataContainer>
-          <Title style={{ color: '#CECAEB' }}>Number Phone</Title>
+          <ReviewTitle>Phone number</ReviewTitle>
           <Title>{dataUser.phoneNumber}</Title>
         </DataContainer>
-        <StyledButton style={{ marginTop: '16px' }}>Complete</StyledButton>
+        <StyledButton style={{ marginTop: '16px' }} onClick={onContinue}>
+          Complete
+        </StyledButton>
       </WrapperReview>
     </Modal>
   );

@@ -7,14 +7,13 @@ import {
   Wrapper,
 } from '../../index.styles';
 import { Modal } from '../../../Modal';
-import { stepsForm } from '../helpers';
 import { useEnterPassword } from './useEnterPassword';
 
 interface IEnterPassword {
-  step: (i: stepsForm) => void;
+  onContinue: () => void;
 }
 
-export function EnterPassword({ step }: IEnterPassword) {
+export function EnterPassword({ onContinue }: IEnterPassword) {
   let { form, touchedErrors, isValid } = useEnterPassword();
 
   return (
@@ -44,10 +43,7 @@ export function EnterPassword({ step }: IEnterPassword) {
           />
           <Error>{touchedErrors.repeatPassword}</Error>
         </ContainerInput>
-        <StyledButton
-          disabled={!isValid}
-          onClick={() => step(stepsForm.USER_DATA)}
-        >
+        <StyledButton disabled={!isValid} onClick={onContinue}>
           Continue
         </StyledButton>
       </Wrapper>

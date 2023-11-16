@@ -10,9 +10,8 @@ let validationSchema = yup.object().shape({
   name: yup
     .string()
     .required('This is a required field')
-    .min(3, 'Minimum length - 3 characters')
-    .max(50, 'Maximum length - 50 characters')
-    .matches(/^[a-zA-Zа-яА-ЯёЁ]+$/, 'The name can only contain letters'),
+    .min(4, 'Minimum length - 4 characters')
+    .max(12, 'Maximum length - 12 characters'),
   phoneNumber: yup
     .string()
     .required('This is a required field')
@@ -25,19 +24,16 @@ let validationSchema = yup.object().shape({
 });
 
 interface IUseEnterClientDetails {
-  dataUser: (v: IDataUser) => void;
+  setDataUser: (v: IDataUser) => void;
 }
 
-export function useEnterClientDetails({ dataUser }: IUseEnterClientDetails) {
+export function useEnterClientDetails({ setDataUser }: IUseEnterClientDetails) {
   let getCountries = async () => {
     let response = await axios.get('https://namaztimes.kz/ru/api/country');
     return response.data;
   };
 
-  let { data: dataCountries } = useSWR(
-    'https://namaztimes.kz/ru/api/country',
-    getCountries,
-  );
+  let { data: dataCountries } = useSWR('countries', getCountries);
 
   let form = useFormik({
     initialValues: {
@@ -47,7 +43,7 @@ export function useEnterClientDetails({ dataUser }: IUseEnterClientDetails) {
       phoneNumber: '',
     },
     onSubmit: (values) => {
-      dataUser({
+      setDataUser({
         name: values.name,
         email: values.email,
         country: values.country,

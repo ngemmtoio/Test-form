@@ -11,50 +11,48 @@ import {
 import {
   EnterClientDetails,
   EnterPassword,
-  stepsForm,
+  StepsForm,
   Review,
+  subTitleMap,
+  dataUserFill,
 } from './partials';
 
 export function FormLogin() {
-  let [step, setStep] = useState(stepsForm.ENTER_USER_DATA);
+  let [step, setStep] = useState(StepsForm.ENTER_USER_DATA);
+  let [dataUser, setDataUser] = useState(dataUserFill);
 
-  let [dataUser, setDataUser] = useState({
-    name: '',
-    email: '',
-    country: '',
-    phoneNumber: '',
-  });
-
-  let renderComponent = useMemo(() => {
-    if (step === stepsForm.ENTER_USER_DATA) {
+  let renderedComponent = useMemo(() => {
+    if (step === StepsForm.ENTER_USER_DATA) {
       return (
         <EnterClientDetails
-          step={(newStep) => setStep(newStep)}
-          dataUser={setDataUser}
+          onContinue={() => {
+            setStep(StepsForm.ENTER_PASSWORD);
+          }}
+          setDataUser={setDataUser}
         />
       );
     }
 
-    if (step === stepsForm.ENTER_PASSWORD) {
-      return <EnterPassword step={(newStep) => setStep(newStep)} />;
+    if (step === StepsForm.ENTER_PASSWORD) {
+      return (
+        <EnterPassword
+          onContinue={() => {
+            setStep(StepsForm.USER_DATA);
+          }}
+        />
+      );
     }
-    if (step === stepsForm.USER_DATA) {
-      return <Review dataUser={dataUser} />;
+    if (step === StepsForm.USER_DATA) {
+      return (
+        <Review
+          dataUser={dataUser}
+          onContinue={() => {
+            setStep(StepsForm.ENTER_USER_DATA);
+          }}
+        />
+      );
     }
   }, [dataUser, step]);
-
-  let renderSubTitle = useMemo(() => {
-    if (step === stepsForm.ENTER_USER_DATA) {
-      return 'Initial info';
-    }
-
-    if (step === stepsForm.ENTER_PASSWORD) {
-      return 'Password screen';
-    }
-    if (step === stepsForm.USER_DATA) {
-      return 'Review screen';
-    }
-  }, [step]);
 
   return (
     <MainWrapper>
@@ -64,9 +62,9 @@ export function FormLogin() {
       <ContentContainer>
         <TitleContainer>
           <TitleMain>Super test form</TitleMain>
-          <SubtitleMain>{renderSubTitle}</SubtitleMain>
+          <SubtitleMain>{subTitleMap[step]}</SubtitleMain>
         </TitleContainer>
-        {renderComponent}
+        {renderedComponent}
       </ContentContainer>
     </MainWrapper>
   );
