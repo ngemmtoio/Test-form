@@ -26,7 +26,7 @@ export function EnterClientDetails({
     useEnterClientDetails({ setDataUser });
 
   if (isLoading) {
-    return <FullScreenSpin description="Данные загружаются..." />;
+    return <FullScreenSpin description="Data is loading..." />;
   }
 
   return (
