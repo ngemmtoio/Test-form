@@ -33,7 +33,7 @@ export function useEnterClientDetails({ setDataUser }: IUseEnterClientDetails) {
     return response.data;
   };
 
-  let { data: dataCountries } = useSWR('countries', getCountries);
+  let { data: dataCountries, isLoading } = useSWR('countries', getCountries);
 
   let form = useFormik({
     initialValues: {
@@ -76,5 +76,6 @@ export function useEnterClientDetails({ setDataUser }: IUseEnterClientDetails) {
     touchedErrors,
     isValid,
     renderedSelectCountry,
+    isLoading,
   };
 }

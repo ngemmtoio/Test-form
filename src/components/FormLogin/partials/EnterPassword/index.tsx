@@ -4,9 +4,9 @@ import {
   StyledButton,
   StyledPasswordInput,
   Title,
+  EnterPasswordContainer,
   Wrapper,
 } from '../../index.styles';
-import { Modal } from '../../../Modal';
 import { useEnterPassword } from './useEnterPassword';
 
 interface IEnterPassword {
@@ -17,8 +17,8 @@ export function EnterPassword({ onContinue }: IEnterPassword) {
   let { form, touchedErrors, isValid } = useEnterPassword();
 
   return (
-    <Modal>
-      <Wrapper>
+    <Wrapper>
+      <EnterPasswordContainer>
         <ContainerInput>
           <Title>Password</Title>
           <StyledPasswordInput
@@ -46,7 +46,7 @@ export function EnterPassword({ onContinue }: IEnterPassword) {
         <StyledButton disabled={!isValid} onClick={onContinue}>
           Continue
         </StyledButton>
-      </Wrapper>
-    </Modal>
+      </EnterPasswordContainer>
+    </Wrapper>
   );
 }

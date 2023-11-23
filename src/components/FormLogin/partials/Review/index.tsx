@@ -1,10 +1,10 @@
-import { Modal } from '../../../Modal';
 import {
   DataContainer,
   ReviewTitle,
   StyledButton,
   Title,
-  WrapperReview,
+  Wrapper,
+  ReviewContainer,
 } from '../../index.styles';
 import { IDataUser } from '../../../../entities';
 
@@ -15,8 +15,8 @@ interface IReview {
 
 export function Review({ dataUser, onContinue }: IReview) {
   return (
-    <Modal>
-      <WrapperReview>
+    <Wrapper>
+      <ReviewContainer>
         <DataContainer>
           <ReviewTitle>Username</ReviewTitle>
           <Title>{dataUser.name}</Title>
@@ -36,7 +36,7 @@ export function Review({ dataUser, onContinue }: IReview) {
         <StyledButton style={{ marginTop: '16px' }} onClick={onContinue}>
           Complete
         </StyledButton>
-      </WrapperReview>
-    </Modal>
+      </ReviewContainer>
+    </Wrapper>
   );
 }

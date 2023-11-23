@@ -1,4 +1,3 @@
-import { Modal } from '../../../Modal';
 import {
   ContainerInput,
   StyledButton,
@@ -7,9 +6,11 @@ import {
   Error,
   StyledInputMask,
   StyledSelectInput,
-  ClientDetailsWrapper,
+  ClientDetailsContainer,
+  Wrapper,
 } from '../../index.styles';
 import { IDataUser } from '../../../../entities';
+import { FullScreenSpin } from '../../../FullScreenSpin';
 import { useEnterClientDetails } from './useEnterClientDetails';
 
 interface IEnterClientDetails {
@@ -21,12 +22,16 @@ export function EnterClientDetails({
   onContinue,
   setDataUser,
 }: IEnterClientDetails) {
-  let { form, touchedErrors, isValid, renderedSelectCountry } =
+  let { form, touchedErrors, isValid, renderedSelectCountry, isLoading } =
     useEnterClientDetails({ setDataUser });
 
+  if (isLoading) {
+    return <FullScreenSpin description="Данные загружаются..." />;
+  }
+
   return (
-    <Modal>
-      <ClientDetailsWrapper>
+    <Wrapper>
+      <ClientDetailsContainer>
         <ContainerInput>
           <Title>Username</Title>
           <StyledInput
@@ -60,6 +65,7 @@ export function EnterClientDetails({
             onChange={(value) => form.setFieldValue('country', value)}
             showSearch
             allowClear
+            disabled={isLoading}
           />
           <Error>{touchedErrors.country}</Error>
         </ContainerInput>
@@ -86,7 +92,7 @@ export function EnterClientDetails({
         >
           Continue
         </StyledButton>
-      </ClientDetailsWrapper>
-    </Modal>
+      </ClientDetailsContainer>
+    </Wrapper>
   );
 }

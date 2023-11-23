@@ -12,6 +12,13 @@ export let MainWrapper = styled.div`
   justify-content: center;
 `;
 
+export let Wrapper = styled.div`
+  width: 400px;
+  padding: 40px 20px;
+  border-radius: 20px;
+  background-color: #817ca5;
+`;
+
 export let StepperContainer = styled.div`
   position: absolute;
   top: 0;
@@ -44,12 +51,12 @@ export let SubtitleMain = styled.div`
   color: #817ca5;
 `;
 
-export let Wrapper = styled.div`
+export let EnterPasswordContainer = styled.div`
   display: grid;
   grid-row-gap: 40px;
 `;
 
-export let ClientDetailsWrapper = styled(Wrapper)`
+export let ClientDetailsContainer = styled(EnterPasswordContainer)`
   grid-row-gap: 20px;
 `;
 
@@ -148,7 +155,7 @@ export let Error = styled.div`
   color: #da2121;
 `;
 
-export let WrapperReview = styled.div`
+export let ReviewContainer = styled.div`
   display: grid;
   grid-row-gap: 24px;
 `;

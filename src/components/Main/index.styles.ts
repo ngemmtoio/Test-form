@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import backgroundSvg from '../../Img/background.svg';
+import backgroundSvg from '../../image/background.svg';
 
 export let Wrapper = styled.div`
   width: 100%;
